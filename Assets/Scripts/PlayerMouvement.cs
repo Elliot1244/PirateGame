@@ -5,14 +5,23 @@ using UnityEngine.AI;
 
 public class PlayerMouvement : MonoBehaviour
 {
-    [SerializeField] Transform _target;
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0)) //Lors du click gauche de la souris
+        if (Input.GetKey(KeyCode.Mouse0)) //Lors du click gauche de la souris
         {
             MoveTowardcursor();
         }
+
+        UpdateAnimations();
+    }
+
+    private void UpdateAnimations()
+    {
+        Vector3 _velocity = GetComponent<NavMeshAgent>().velocity; //On récupère la vélocité du navMeshagent.
+        Vector3 _localeVelocity = transform.InverseTransformDirection(_velocity);//On converti cette vélocité en vélocité locale grace à "InverseTransformDirection()".
+        float _speed = _localeVelocity.z;
+        GetComponent<Animator>().SetFloat("ForwardSpeed", _speed); //On applique la vitesse au Blendtree.
     }
 
     private void MoveTowardcursor()
