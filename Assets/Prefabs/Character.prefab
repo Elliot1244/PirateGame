@@ -3497,7 +3497,7 @@ GameObject:
   - component: {fileID: 386648315886540377}
   - component: {fileID: 3651785711002300786}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Character
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3589,6 +3589,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weaponRange: 2
+  _animator: {fileID: 0}
+  _timeBetweenAttacks: 1
 --- !u!195 &3651785711002300786
 NavMeshAgent:
   m_ObjectHideFlags: 0

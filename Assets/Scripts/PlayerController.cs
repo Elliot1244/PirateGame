@@ -9,6 +9,7 @@ namespace RPG.Control
 {
     public class PlayerController : MonoBehaviour
     {
+
         private void Update()
         {
             if(InteractWithCombat()) return;
