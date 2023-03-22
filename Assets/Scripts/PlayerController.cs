@@ -3,15 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using RPG.Movement;
 using RPG.Combat;
+using RPG.Core;
 using System;
 
 namespace RPG.Control
 {
     public class PlayerController : MonoBehaviour
     {
+        Health _health;
 
+        private void Start()
+        {
+            _health = GetComponent<Health>();
+        }
         private void Update()
         {
+            if (_health.IsDead()) return;
             if(InteractWithCombat()) return;
             if(InteractWithMovement()) return;
             Debug.Log("C'est le vide");
@@ -25,11 +32,20 @@ namespace RPG.Control
             foreach(RaycastHit hit in _hits)
             {
                CombatTarget target = hit.transform.GetComponent<CombatTarget>(); //Les cibles potentielles sont des GameObjects avec le composant "CombatTarget".
-                if (target == null) continue; //Si l'itération actuelle du tableau _hits n'est pas une target, passe à la prochaine itération.
+                
+                if(target == null)
+                {
+                    continue;
+                }
+
+                if (!GetComponent<Fighter>().CanAttack(target.gameObject))
+                {
+                    continue;
+                }
 
                 if(Input.GetMouseButtonDown(0))
                 {
-                    GetComponent<Fighter>().Attack(target); //On utiliser la fonction Attack pour attaquer la cible.
+                    GetComponent<Fighter>().Attack(target.gameObject); //On utiliser la fonction Attack pour attaquer la cible.
                 }
                 return true;
             }
