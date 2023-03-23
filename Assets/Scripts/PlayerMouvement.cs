@@ -51,6 +51,5 @@ namespace RPG.Movement
             _navMeshAgent.destination = destination; //La nouvelle destination du joueur est là où nous avons cliqué.
             _navMeshAgent.isStopped = false;
         }
-
     }
 }
