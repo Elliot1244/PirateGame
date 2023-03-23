@@ -18,6 +18,7 @@ namespace RPG.Combat
         private void Update()
         {
             _timeSinceLastAttack += Time.deltaTime;
+
             if (_target == null) return;
 
             if (_target.IsDead()) return;

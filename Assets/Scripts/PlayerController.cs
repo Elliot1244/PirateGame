@@ -10,11 +10,13 @@ namespace RPG.Control
 {
     public class PlayerController : MonoBehaviour
     {
-        Health _health;
+        Health  _health;
+        Fighter _fighter;
 
         private void Start()
         {
             _health = GetComponent<Health>();
+            _fighter = GetComponent<Fighter>();
         }
         private void Update()
         {
@@ -23,8 +25,6 @@ namespace RPG.Control
             if(InteractWithMovement()) return;
             Debug.Log("C'est le vide");
         }
-
-        
 
         private bool InteractWithCombat()
         {
@@ -43,7 +43,7 @@ namespace RPG.Control
                     continue;
                 }
 
-                if(Input.GetMouseButtonDown(0))
+                if(Input.GetMouseButton(0))
                 {
                     GetComponent<Fighter>().Attack(target.gameObject); //On utiliser la fonction Attack pour attaquer la cible.
                 }
@@ -58,7 +58,7 @@ namespace RPG.Control
             bool _hasHit = Physics.Raycast(GetMouseRay(), out _hit);
             if (_hasHit == true)
             {
-                if(Input.GetKey(KeyCode.Mouse0))
+                if(Input.GetMouseButton(0))
                 {
                     GetComponent<PlayerMouvement>().StartMovementAction(_hit.point);
                 }
